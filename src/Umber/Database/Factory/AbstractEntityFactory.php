@@ -6,7 +6,6 @@ namespace Umber\Database\Factory;
 
 use Umber\Database\EntityFactoryInterface;
 use Umber\Database\EntityInterface;
-
 use Umber\Date\Factory\DateTimeFactoryInterface;
 use Umber\Prototype\Column\Date\CreatedAtAwareInterface;
 use Umber\Prototype\Column\Date\DeletedAtAwareInterface;
