@@ -1,0 +1,43 @@
+{
+  "name": "umber/database",
+  "description": "A series of classes handling database startup and handling.",
+  "type": "library",
+  "license": "MIT",
+
+  "require": {
+    "php": ">=7.1",
+
+    "pagerfanta/pagerfanta": "~2.0"
+  },
+
+  "require-dev": {
+    "phpunit/phpunit": "^7.0"
+  },
+
+  "autoload": {
+    "psr-4": {
+      "Umber\\Database\\": "src/Umber/Database"
+    }
+  },
+
+  "autoload-dev": {
+    "psr-4": {
+      "Umber\\Database\\Tests\\": "tests/Umber/Database/Tests"
+    }
+  },
+
+  "extra": {
+    "branch-alias": {
+      "dev-develop": "0.1-dev"
+    }
+  },
+
+  "archive": {
+    "exclude": [
+      "!vendor",
+      "*phpunit.xml",
+      ".travis.yml",
+      "tests"
+    ]
+  }
+}
