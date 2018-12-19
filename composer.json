@@ -1,11 +1,14 @@
 {
   "name": "umber/database",
-  "description": "A series of classes handling database startup and handling.",
+  "description": "A series of utilities aimed at database startup.",
   "type": "library",
   "license": "MIT",
 
   "require": {
     "php": ">=7.1",
+
+    "umber/date": "^1.0",
+    "umber/prototype": "^1.0",
 
     "pagerfanta/pagerfanta": "~2.0"
   },
