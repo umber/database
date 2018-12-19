@@ -49,8 +49,8 @@ class PaginatorFactory implements PaginatorFactoryInterface
         $limit = (int) $limitRequested ?: $limit ?: $this->limit;
 
         $paginator = new Paginator($adapter);
-        $paginator->setCurrentPage($page);
         $paginator->setMaxPerPage($limit);
+        $paginator->setCurrentPage($page);
 
         return $paginator;
     }
