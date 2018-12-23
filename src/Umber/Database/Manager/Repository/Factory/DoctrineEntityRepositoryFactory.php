@@ -35,14 +35,13 @@ final class DoctrineEntityRepositoryFactory implements EntityRepositoryFactoryIn
     public function create(string $entity): EntityRepositoryInterface
     {
         $em = $this->registry->getEntityManager();
-
-        /** @var AbstractDoctrineEntityRepository $class */
         $class = $em->getClassMetadata($entity)->customRepositoryClassName;
 
         if ($class === null) {
             throw new Exception('must define repository class');
         }
 
+        /** @var AbstractDoctrineEntityRepository $repository */
         $repository = new $class(
             $entity,
             $em,
