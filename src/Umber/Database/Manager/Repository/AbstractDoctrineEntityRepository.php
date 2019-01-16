@@ -4,33 +4,31 @@ declare(strict_types=1);
 
 namespace Umber\Database\Manager\Repository;
 
-use Umber\Database\EntityRepositoryInterface;
+use Umber\Database\Manager\DoctrineDatabaseManager;
 use Umber\Database\Pagination\PaginatorFactoryInterface;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 
 /**
  * A custom entity repository that is stripped back.
  */
-abstract class AbstractDoctrineEntityRepository implements
-    EntityRepositoryInterface
+abstract class AbstractDoctrineEntityRepository
 {
     protected const SORT_ASC = 'ASC';
     protected const SORT_DESC = 'DESC';
 
-    private $entity;
-    private $entityManager;
+    private $database;
     private $paginatorFactory;
+    private $entity;
 
     public function __construct(
-        string $entity,
-        EntityManagerInterface $entityManager,
-        PaginatorFactoryInterface $paginatorFactory
+        DoctrineDatabaseManager $database,
+        PaginatorFactoryInterface $paginatorFactory,
+        string $entity
     ) {
-        $this->entity = $entity;
-        $this->entityManager = $entityManager;
+        $this->database = $database;
         $this->paginatorFactory = $paginatorFactory;
+        $this->entity = $entity;
     }
 
     /**
@@ -46,7 +44,7 @@ abstract class AbstractDoctrineEntityRepository implements
      */
     final protected function createQueryBuilder(string $alias, ?string $indexBy = null): QueryBuilder
     {
-        return $this->entityManager->createQueryBuilder()
+        return $this->database->createQueryBuilder()
             ->select($alias)
             ->from($this->entity, $alias, $indexBy);
     }
