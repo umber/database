@@ -7,14 +7,14 @@ namespace Umber\Database\Manager\Repository;
 use Umber\Database\EntityRepositoryInterface;
 use Umber\Database\Pagination\PaginatorFactoryInterface;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 
 /**
- * A custom entity repository.
+ * A custom entity repository that is stripped back.
  */
-abstract class AbstractDoctrineEntityRepository implements EntityRepositoryInterface, ObjectRepository
+abstract class AbstractDoctrineEntityRepository implements
+    EntityRepositoryInterface
 {
     protected const SORT_ASC = 'ASC';
     protected const SORT_DESC = 'DESC';
@@ -49,59 +49,5 @@ abstract class AbstractDoctrineEntityRepository implements EntityRepositoryInter
         return $this->entityManager->createQueryBuilder()
             ->select($alias)
             ->from($this->entity, $alias, $indexBy);
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @internal These methods are implemented for the interface, do not consume them.
-     */
-    public function find($id, $lockMode = null, $lockVersion = null)
-    {
-        return $this->entityManager->find($this->entity, $id);
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @internal These methods are implemented for the interface, do not consume them.
-     */
-    public function findAll()
-    {
-        return $this->findBy([]);
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @internal These methods are implemented for the interface, do not consume them.
-     */
-    public function findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
-    {
-        $persister = $this->entityManager->getUnitOfWork()->getEntityPersister($this->entity);
-
-        return $persister->loadAll($criteria, $orderBy, $limit, $offset);
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @internal These methods are implemented for the interface, do not consume them.
-     */
-    public function findOneBy(array $criteria, ?array $orderBy = null)
-    {
-        $persister = $this->entityManager->getUnitOfWork()->getEntityPersister($this->entity);
-
-        return $persister->load($criteria, null, null, [], null, 1, $orderBy);
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @internal These methods are implemented for the interface, do not consume them.
-     */
-    public function getClassName()
-    {
-        return $this->entity;
     }
 }
