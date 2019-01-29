@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace Umber\Database\Manager;
 
-use Doctrine\ORM\QueryBuilder;
-use Umber\Database\DatabaseManagerInterface;
-use Umber\Database\EntityRepositoryFactoryInterface;
-
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * A doctrine database manager.
