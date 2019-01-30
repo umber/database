@@ -4,32 +4,25 @@ declare(strict_types=1);
 
 namespace Umber\Database\Manager;
 
-use Umber\Database\DatabaseManagerInterface;
-use Umber\Database\EntityRepositoryFactoryInterface;
-use Umber\Database\EntityRepositoryInterface;
-
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * A doctrine database manager.
  */
-final class DoctrineDatabaseManager implements DatabaseManagerInterface
+final class DoctrineDatabaseManager
 {
     private $registry;
-    private $entityRepositoryFactory;
 
-    public function __construct(
-        RegistryInterface $registry,
-        EntityRepositoryFactoryInterface $entityRepositoryFactory
-    ) {
+    public function __construct(RegistryInterface $registry)
+    {
         $this->registry = $registry;
-        $this->entityRepositoryFactory = $entityRepositoryFactory;
     }
 
     /**
-     * Return the entity manager.
+     * Return the doctrine entity manager.
      */
     public function getEntityManager(): EntityManagerInterface
     {
@@ -37,12 +30,10 @@ final class DoctrineDatabaseManager implements DatabaseManagerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Create a doctrine query builder.
      */
-    public function getRepository(string $entity): EntityRepositoryInterface
+    public function createQueryBuilder(): QueryBuilder
     {
-        $repository = $this->entityRepositoryFactory->create($entity);
-
-        return $repository;
+        return $this->getEntityManager()->createQueryBuilder();
     }
 }

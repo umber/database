@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace Umber\Database\Pagination;
 
-interface PaginatorInterface
+use Countable;
+use IteratorAggregate;
+use Traversable;
+
+interface PaginatorInterface extends Traversable, Countable, IteratorAggregate
 {
     public function getResultPerPageCount(): int;
 
